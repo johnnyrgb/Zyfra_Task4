@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zyfra_Task4", "Zyfra_Task4.csproj", "{D8422E01-F3E1-4170-B558-5A7DD4801C82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zyfra_Task4", "Zyfra_Task4\Zyfra_Task4.csproj", "{D8422E01-F3E1-4170-B558-5A7DD4801C82}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zyfra_Task4_API", "..\Zyfra_Task4_API\Zyfra_Task4_API.csproj", "{CB0D7DD8-1AB7-4D57-BD34-304313C4B59F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zyfra_Task4_API", "Zyfra_Task4_API\Zyfra_Task4_API.csproj", "{CB0D7DD8-1AB7-4D57-BD34-304313C4B59F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyfra_Task4_API_Tests", "..\Zyfra_Task4_API_Tests\Zyfra_Task4_API_Tests.csproj", "{3CD0F895-FC90-4256-B443-6E2B67BA4504}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyfra_Task4_API_Tests", "Zyfra_Task4_API_Tests\Zyfra_Task4_API_Tests.csproj", "{3CD0F895-FC90-4256-B443-6E2B67BA4504}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
