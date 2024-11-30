@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
-    <Folder Include="DTOs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zyfra_Task4.DataAccess\Zyfra_Task4.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
