@@ -13,9 +13,9 @@ namespace Zyfra_Task4.DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<DataEntry> builder)
         {
-            builder.HasKey(h => h.Id); // Первичный ключ
+            builder.HasKey(de => de.Id); // Первичный ключ
 
-            builder.Property(h => h.Value) // Значение
+            builder.Property(de => de.Value) // Значение
                 .IsRequired()
                 .HasMaxLength(4096);
         }

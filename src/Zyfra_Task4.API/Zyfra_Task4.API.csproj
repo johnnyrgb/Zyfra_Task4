@@ -7,7 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Zyfra_Task4.BusinessLogic\Zyfra_Task4.BusinessLogic.csproj" />
+    <ProjectReference Include="..\Zyfra_Task4.DataAccess\Zyfra_Task4.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

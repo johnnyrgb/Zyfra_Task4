@@ -17,15 +17,15 @@ public class DataEntryController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(_dataEntryService.GetAllDataEntriesAsync());
+        return Ok(await _dataEntryService.GetAllDataEntriesAsync());
     }
 
     [HttpGet("{id:int}")]
-    public IActionResult GetById(int id)
+    public async Task<IActionResult> GetById(int id)
     {
-        var entry = _dataEntryService.GetDataEntryAsync(id);
+        var entry = await _dataEntryService.GetDataEntryAsync(id);
         if (entry == null)
             return NotFound($"Элемент с Id {id} не найден.");
 
@@ -33,30 +33,53 @@ public class DataEntryController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult CreateOrUpdate([FromBody] DataEntryDTO? dataEntryDTO)
+    public async Task<IActionResult> CreateOrUpdate([FromBody] DataEntryDTO? dataEntryDTO)
     {
         if (dataEntryDTO == null)
             return BadRequest("Некорректные данные.");
 
-        var entry = _dataEntryService.GetDataEntryAsync(dataEntryDTO.Id);
-
-        try
+        // Если Id не передан, создаем новый объект
+        if (dataEntryDTO.Id == 0)
         {
-            if (entry == null)
+            try
             {
-                _dataEntryService.CreateDataEntryAsync(dataEntryDTO);
-                return CreatedAtAction(nameof(CreateOrUpdate), entry);
+                // Проверяем, не существует ли уже записи с таким значением
+                var existingEntry = await _dataEntryService.GetDataEntryAsync(dataEntryDTO.Value);
+                if (existingEntry != null)
+                {
+                    return Conflict($"Запись с значением '{dataEntryDTO.Value}' уже существует.");
+                }
+
+                // Создаем и возвращаем новую запись
+                await _dataEntryService.CreateDataEntryAsync(dataEntryDTO);
+                var createdEntry = await _dataEntryService.GetDataEntryAsync(dataEntryDTO.Value);
+                return CreatedAtAction(nameof(CreateOrUpdate), new { id = createdEntry.Id }, createdEntry);
             }
-            else
+            catch (Exception ex)
             {
-                _dataEntryService.UpdateDataEntryAsync(dataEntryDTO);
-                return Ok($"Элемент с Id {dataEntryDTO.Id} был обновлен.");
+                // Логирование?
+                return StatusCode(500, "Произошла ошибка при создании записи.");
             }
         }
-        catch (Exception ex)
+        else
         {
-            // Логирование?
-            throw;
+            try
+            {
+                // Проверяем, не существует ли уже записи с таким Id
+                var entry = await _dataEntryService.GetDataEntryAsync(dataEntryDTO.Id);
+                if (entry == null)
+                {
+                    return NotFound($"Запись с Id {dataEntryDTO.Id} не найдена.");
+                }
+
+                await _dataEntryService.UpdateDataEntryAsync(dataEntryDTO);
+                return Ok($"Элемент с Id {dataEntryDTO.Id} был обновлен.");
+            }
+            catch (Exception ex)
+            {
+                // Логирование?
+                return StatusCode(500, "Произошла ошибка при обновлении записи.");
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Zyfra_Task4.BusinessLogic.Interfaces;
 public interface IDataEntryService
 {
     Task<DataEntryDTO?> GetDataEntryAsync(int id);
+    Task<DataEntryDTO?> GetDataEntryAsync(string value);
     Task<IEnumerable<DataEntryDTO>> GetAllDataEntriesAsync();
     Task CreateDataEntryAsync(DataEntryDTO dataEntryDTO);
     Task UpdateDataEntryAsync(DataEntryDTO dataEntryDTO);

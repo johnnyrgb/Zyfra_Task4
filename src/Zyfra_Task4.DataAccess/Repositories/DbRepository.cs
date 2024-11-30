@@ -3,7 +3,7 @@ using Zyfra_Task4.DataAccess.Interfaces;
 
 namespace Zyfra_Task4.DataAccess.Repositories;
 
-public class DbRepository
+public class DbRepository : IDbRepository
 {
     private readonly DatabaseContext _context;
     private IDataEntryRepository? _dataEntryRepository;
@@ -13,7 +13,7 @@ public class DbRepository
         _context = context;
     }
 
-    public IDataEntryRepository Habit
+    public IDataEntryRepository DataEntry
     {
         get
         {
