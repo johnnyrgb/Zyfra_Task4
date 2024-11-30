@@ -9,6 +9,6 @@ namespace Zyfra_Task4.DataAccess.Interfaces
 {
     public interface IDbRepository
     {
-        IEntityRepository<DataEntry> DataEntry { get; set; }
+        IDataEntryRepository DataEntry { get; set; }
     }
 }

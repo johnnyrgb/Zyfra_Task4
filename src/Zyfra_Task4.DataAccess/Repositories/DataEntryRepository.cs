@@ -4,7 +4,7 @@ using Zyfra_Task4.DataAccess.Interfaces;
 
 namespace Zyfra_Task4.DataAccess.Repositories;
 
-public class DataEntryRepository : IEntityRepository<DataEntry>
+public class DataEntryRepository : IDataEntryRepository
 {
     private readonly DatabaseContext _databaseContext;
 
@@ -17,7 +17,13 @@ public class DataEntryRepository : IEntityRepository<DataEntry>
     public async Task<DataEntry?> GetByIdAsync(int id)
     {
         return await _databaseContext.DataEntries
-            .FirstOrDefaultAsync(hr => hr.Id == id);
+            .FirstOrDefaultAsync(de => de.Id == id);
+    }
+
+    public async Task<DataEntry?> GetByValueAsync(string value)
+    {
+        return await _databaseContext.DataEntries
+            .FirstOrDefaultAsync(de => de.Value == value);
     }
 
     // Получение всех записей
@@ -43,10 +49,10 @@ public class DataEntryRepository : IEntityRepository<DataEntry>
     // Удаление записи по идентификатору
     public async Task DeleteByIdAsync(int id)
     {
-        var habitRecord = await _databaseContext.DataEntries.FindAsync(id);
-        if (habitRecord != null)
+        var dataEntry = await _databaseContext.DataEntries.FindAsync(id);
+        if (dataEntry != null)
         {
-            _databaseContext.DataEntries.Remove(habitRecord);
+            _databaseContext.DataEntries.Remove(dataEntry);
             await _databaseContext.SaveChangesAsync();
         }
     }

@@ -6,14 +6,14 @@ namespace Zyfra_Task4.DataAccess.Repositories;
 public class DbRepository
 {
     private readonly DatabaseContext _context;
-    private IEntityRepository<DataEntry>? _dataEntryRepository;
+    private IDataEntryRepository? _dataEntryRepository;
 
     public DbRepository(DatabaseContext context)
     {
         _context = context;
     }
 
-    public IEntityRepository<DataEntry> Habit
+    public IDataEntryRepository Habit
     {
         get
         {

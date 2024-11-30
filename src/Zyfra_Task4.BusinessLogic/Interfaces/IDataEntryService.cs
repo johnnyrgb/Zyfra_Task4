@@ -7,6 +7,6 @@ public interface IDataEntryService
     Task<DataEntryDTO?> GetDataEntryAsync(int id);
     Task<IEnumerable<DataEntryDTO>> GetAllDataEntriesAsync();
     Task CreateDataEntryAsync(DataEntryDTO dataEntryDTO);
-    Task UpdateHabitRecordAsync(DataEntryDTO dataEntryDTO);
-    Task DeleteHabitRecordAsync(int id);
+    Task UpdateDataEntryAsync(DataEntryDTO dataEntryDTO);
+    Task DeleteDataEntryAsync(int id);
 }
