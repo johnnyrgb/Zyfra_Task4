@@ -15,13 +15,18 @@ public class DataEntryController : ControllerBase
     {
         _dataEntryService = dataEntryService;
     }
-
+    /// <summary>
+    /// Возвращает все записи
+    /// </summary>
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _dataEntryService.GetAllDataEntriesAsync());
     }
 
+    /// <summary>
+    /// Возвращает запись по переданному Id
+    /// </summary>
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -32,6 +37,12 @@ public class DataEntryController : ControllerBase
         return Ok(entry);
     }
 
+    /// <summary>
+    /// Добавляет или обновляет запись. Если передан Id, то происходит поиск по Id для обновления записи.
+    /// Если Id не передан, а передано только значение, то ищет по значению. Если не находит -- добавляет новую.
+    /// </summary>
+    /// <param name="dataEntryDTO"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> CreateOrUpdate([FromBody] DataEntryDTO? dataEntryDTO)
     {

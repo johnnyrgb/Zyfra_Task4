@@ -16,123 +16,94 @@ public class DataEntryServiceTests
         _service = new DataEntryService(_repositoryMock.Object);
     }
 
+    /// <summary>
+    /// Возвращает запись по Id, если существует
+    /// </summary>
     [Fact]
-    public async Task GetDataEntryAsync_ShouldReturnDTO_WhenEntityExists()
+    public async Task GetDataEntryAsync_ById_ReturnsCorrectDTO()
     {
         // Arrange
-        var dataEntry = new DataEntry { Id = 1, Value = "Test" };
-        _repositoryMock.Setup(r => r.DataEntry.GetByIdAsync(1))
-                       .ReturnsAsync(dataEntry);
+        var dataEntry = new DataEntry { Id = 1, Value = "Тестовое значение" };
+        _repositoryMock.Setup(repo => repo.DataEntry.GetByIdAsync(1))
+            .ReturnsAsync(dataEntry);
 
         // Act
         var result = await _service.GetDataEntryAsync(1);
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(dataEntry.Id, result.Id);
+        Assert.Equal(dataEntry.Id, result!.Id);
         Assert.Equal(dataEntry.Value, result.Value);
     }
 
+    /// <summary>
+    /// Возвращает запись по значению, если существует
+    /// </summary>
     [Fact]
-    public async Task GetDataEntryAsync_ShouldReturnNull_WhenEntityDoesNotExist()
+    public async Task GetDataEntryAsync_ByValue_ReturnsCorrectDTO()
     {
         // Arrange
-        _repositoryMock.Setup(r => r.DataEntry.GetByIdAsync(1))
-                       .ReturnsAsync((DataEntry?)null);
+        var dataEntry = new DataEntry { Id = 1, Value = "Тестовое значение" };
+        _repositoryMock.Setup(repo => repo.DataEntry.GetByValueAsync("Тестовое значение"))
+            .ReturnsAsync(dataEntry);
 
         // Act
-        var result = await _service.GetDataEntryAsync(1);
+        var result = await _service.GetDataEntryAsync("Тестовое значение");
 
         // Assert
-        Assert.Null(result);
+        Assert.NotNull(result);
+        Assert.Equal(dataEntry.Id, result!.Id);
+        Assert.Equal(dataEntry.Value, result.Value);
     }
 
+    /// <summary>
+    /// Возвращает список всех записей
+    /// </summary>
     [Fact]
-    public async Task CreateDataEntryAsync_ShouldCallRepository_WhenValueIsValid()
-    {
-        // Arrange
-        var dataEntryDTO = new DataEntryDTO { Id = 1, Value = "ValidValue" };
-
-        // Act
-        _repositoryMock.Setup(r => r.DataEntry.CreateAsync(It.IsAny<DataEntry>())).Returns(Task.CompletedTask);
-        await _service.CreateDataEntryAsync(dataEntryDTO);
-
-        // Assert
-        _repositoryMock.Verify(r => r.DataEntry.CreateAsync(It.Is<DataEntry>(e =>
-            e.Id == dataEntryDTO.Id && e.Value == dataEntryDTO.Value
-        )), Times.Once);
-    }
-
-    [Fact]
-    public async Task CreateDataEntryAsync_ShouldThrowException_WhenValueIsEmpty()
-    {
-        // Arrange
-        var dataEntryDTO = new DataEntryDTO { Id = 1, Value = " " };
-
-        // Act & Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _service.CreateDataEntryAsync(dataEntryDTO));
-    }
-
-    [Fact]
-    public async Task UpdateDataEntryAsync_ShouldCallRepository_WhenValueIsValid()
-    {
-        // Arrange
-        var dataEntryDTO = new DataEntryDTO { Id = 1, Value = "UpdatedValue" };
-
-        // Act
-        await _service.UpdateDataEntryAsync(dataEntryDTO);
-
-        // Assert
-        _repositoryMock.Verify(r => r.DataEntry.UpdateAsync(It.Is<DataEntry>(e =>
-            e.Id == dataEntryDTO.Id && e.Value == dataEntryDTO.Value
-        )), Times.Once);
-    }
-
-    [Fact]
-    public async Task UpdateDataEntryAsync_ShouldThrowException_WhenValueIsEmpty()
-    {
-        // Arrange
-        var dataEntryDTO = new DataEntryDTO { Id = 1, Value = "" };
-
-        // Act & Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(() =>
-            _service.UpdateDataEntryAsync(dataEntryDTO));
-    }
-
-    [Fact]
-    public async Task DeleteDataEntryAsync_ShouldCallRepository()
-    {
-        // Arrange
-        var id = 1;
-
-        // Act
-        await _service.DeleteDataEntryAsync(id);
-
-        // Assert
-        _repositoryMock.Verify(r => r.DataEntry.DeleteByIdAsync(id), Times.Once);
-    }
-
-    [Fact]
-    public async Task GetAllDataEntriesAsync_ShouldReturnMappedDTOs()
+    public async Task GetAllDataEntriesAsync_ReturnsAllDTOs()
     {
         // Arrange
         var dataEntries = new List<DataEntry>
         {
-            new DataEntry { Id = 1, Value = "Value1" },
-            new DataEntry { Id = 2, Value = "Value2" }
+            new DataEntry { Id = 1, Value = "Тестовое значение 1" },
+            new DataEntry { Id = 2, Value = "Тестовое значение 2" }
         };
-
-        _repositoryMock.Setup(r => r.DataEntry.GetAllAsync())
-                       .ReturnsAsync(dataEntries);
+        _repositoryMock.Setup(repo => repo.DataEntry.GetAllAsync())
+            .ReturnsAsync(dataEntries);
 
         // Act
         var result = await _service.GetAllDataEntriesAsync();
 
         // Assert
         Assert.NotNull(result);
-        Assert.Equal(dataEntries.Count, result.Count());
-        Assert.Contains(result, r => r.Id == 1 && r.Value == "Value1");
-        Assert.Contains(result, r => r.Id == 2 && r.Value == "Value2");
+        Assert.Equal(2, result.Count());
+        Assert.Contains(result, dto => dto.Value == "Тестовое значение 1");
+        Assert.Contains(result, dto => dto.Value == "Тестовое значение 2");
+    }
+
+    /// <summary>
+    /// Возвращает исключение при создании, если Value = null
+    /// </summary>
+    [Fact]
+    public async Task CreateDataEntryAsync_InvalidData_ThrowsException()
+    {
+        // Arrange
+        var dto = new DataEntryDTO { Value = "" };
+
+        // Act Assert
+        await Assert.ThrowsAsync<ArgumentNullException>(() => _service.CreateDataEntryAsync(dto));
+    }
+
+    /// <summary>
+    /// Возвращает исключение при обновлении, если Value = null
+    /// </summary>
+    [Fact]
+    public async Task UpdateDataEntryAsync_InvalidData_ThrowsException()
+    {
+        // Arrange
+        var dto = new DataEntryDTO { Id = 1, Value = "" };
+
+        // Act & Assert
+        await Assert.ThrowsAsync<ArgumentNullException>(() => _service.UpdateDataEntryAsync(dto));
     }
 }

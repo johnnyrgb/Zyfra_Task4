@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zyfra_Task4.DataAccess", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zyfra_Task4.BusinessLogic", "src\Zyfra_Task4.BusinessLogic\Zyfra_Task4.BusinessLogic.csproj", "{B0C58220-F825-45A7-BAB4-2F4702D3A096}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyfra_Task4.BusinessLogic.Tests", "tests\Zyfra_Task4.BusinessLogic.Tests\Zyfra_Task4.BusinessLogic.Tests.csproj", "{861DAAE2-4E27-41E8-AE10-122FE61F3149}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zyfra_Task4.BusinessLogic.Tests", "tests\Zyfra_Task4.BusinessLogic.Tests\Zyfra_Task4.BusinessLogic.Tests.csproj", "{861DAAE2-4E27-41E8-AE10-122FE61F3149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyfra_Task4.API", "src\Zyfra_Task4.API\Zyfra_Task4.API.csproj", "{F43480E5-7BA0-4908-A28F-39165CFC5C31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zyfra_Task4.API", "src\Zyfra_Task4.API\Zyfra_Task4.API.csproj", "{F43480E5-7BA0-4908-A28F-39165CFC5C31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zyfra_Task4.API.Tests", "tests\Zyfra_Task4.API.Tests\Zyfra_Task4.API.Tests.csproj", "{48661597-FC0A-4BE3-9B14-77BFDBF67386}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{F43480E5-7BA0-4908-A28F-39165CFC5C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F43480E5-7BA0-4908-A28F-39165CFC5C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F43480E5-7BA0-4908-A28F-39165CFC5C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48661597-FC0A-4BE3-9B14-77BFDBF67386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48661597-FC0A-4BE3-9B14-77BFDBF67386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48661597-FC0A-4BE3-9B14-77BFDBF67386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48661597-FC0A-4BE3-9B14-77BFDBF67386}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{B0C58220-F825-45A7-BAB4-2F4702D3A096} = {27062A64-80A8-44DF-9C4B-AE6E6587BD4F}
 		{861DAAE2-4E27-41E8-AE10-122FE61F3149} = {376CE785-DF87-41A8-843E-1B46E48ABCAB}
 		{F43480E5-7BA0-4908-A28F-39165CFC5C31} = {27062A64-80A8-44DF-9C4B-AE6E6587BD4F}
+		{48661597-FC0A-4BE3-9B14-77BFDBF67386} = {376CE785-DF87-41A8-843E-1B46E48ABCAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0800DA8A-CE86-4FA9-8697-2958E498C3E2}
