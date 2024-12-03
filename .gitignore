@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Zyfra_Task4/Zyfra_Task4.csproj
+/Zyfra_Task4_API/Zyfra_Task4_API.csproj
+/Zyfra_Task4_API_Tests/Zyfra_Task4_API_Tests.csproj
+/Zyfra_Task4_API_Tests/Zyfra_Task4_API_Tests.csproj
+/Zyfra_Task4.sln

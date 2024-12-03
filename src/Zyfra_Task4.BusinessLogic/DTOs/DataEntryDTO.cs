@@ -1,7 +1,8 @@
-﻿namespace Zyfra_Task4_API.Models;
+﻿namespace Zyfra_Task4.BusinessLogic.DTOs;
 
-public class DataEntry
+public class DataEntryDTO
 {
     public int Id { get; set; }
     public string Value { get; set; } = string.Empty;
+
 }
